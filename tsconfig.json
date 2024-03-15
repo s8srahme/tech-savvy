@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react",
+		"baseUrl": "src",
+		"paths": {
+			"@/*": ["./*"]
+		}
+	},
+	"include": ["craco.config.ts", "src/**/*"],
+	// The exclude array contains filenames or patterns that should be skipped when resolving the include array (i.e.
+	// filtering out some folders or files from compilation). It defaults to node_modules, bower_components and
+	// jspm_packages. Test files are ignored at build time by both development and production webpack settings used by
+	// CRA.
+	"exclude": ["node_modules"]
+}

@@ -1,0 +1,117 @@
+{
+	"env": {
+		"browser": true,
+		"jest": true,
+		"node": true
+	},
+	"extends": [
+		"airbnb",
+		"airbnb-typescript",
+		"airbnb/hooks",
+		"plugin:react/jsx-runtime",
+		"plugin:jest/recommended",
+		"plugin:prettier/recommended",
+		"prettier"
+	],
+	"globals": {
+		"document": true,
+		"JSX": true,
+		"localStorage": true,
+		"window": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "./tsconfig.json"
+	},
+	"plugins": ["@typescript-eslint", "jest"],
+	"rules": {
+		"@typescript-eslint/indent": ["warn", "tab", { "SwitchCase": 1 }],
+		"@typescript-eslint/no-explicit-any": [
+			"warn",
+			{
+				"ignoreRestArgs": true
+			}
+		],
+		"@typescript-eslint/quotes": ["warn", "double"],
+		"@typescript-eslint/default-param-last": "off",
+		"import/no-default-export": "warn",
+		"import/no-cycle": "warn",
+		"import/order": [
+			"warn",
+			{
+				"alphabetize": {
+					"caseInsensitive": true,
+					"order": "asc"
+				},
+				"groups": ["builtin", "external", "internal"],
+				"newlines-between": "always",
+				"pathGroups": [
+					{
+						"pattern": "{react+(|-dom|-router-dom),react+(|-dom|-router-dom)/**}",
+						"group": "external",
+						"position": "before"
+					},
+					{
+						"pattern": "@/**",
+						"group": "internal",
+						"position": "before"
+					}
+				],
+				"pathGroupsExcludedImportTypes": ["react"]
+			}
+		],
+		"import/prefer-default-export": "off",
+		"import/extensions": [
+			"warn",
+			"always",
+			{
+				"pattern": {
+					"ts": "never",
+					"tsx": "never"
+				}
+			}
+		],
+		"indent": ["warn", "tab", { "SwitchCase": 1 }],
+		"max-len": [
+			"warn",
+			{
+				"code": 120
+			}
+		],
+		"no-mixed-spaces-and-tabs": "warn",
+		"object-curly-spacing": ["warn", "always"],
+		"react/function-component-definition": [
+			"warn",
+			{
+				"namedComponents": "arrow-function"
+			}
+		],
+		"react/jsx-filename-extension": [
+			"warn",
+			{
+				"extensions": [".ts", ".tsx"]
+			}
+		],
+		"react/jsx-key": "warn",
+		"react/jsx-wrap-multilines": "warn",
+		"react/jsx-props-no-spreading": "off",
+		"react/require-default-props": "off",
+		"react/jsx-uses-react": "off",
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"react-hooks/exhaustive-deps": "warn",
+		"sort-imports": [
+			"warn",
+			{
+				"ignoreDeclarationSort": true
+			}
+		]
+	},
+	"settings": {
+		"import/resolver": {
+			"typescript": {
+				"alwaysTryTypes": true
+			}
+		}
+	}
+}

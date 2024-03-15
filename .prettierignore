@@ -1,0 +1,9 @@
+# testing
+coverage/*
+
+# production
+build/*
+
+# app
+src/service-worker.ts
+src/serviceWorkerRegistration.ts
