@@ -137,7 +137,7 @@ export interface ThemeContextState {
 }
 
 const DEFAULT_CONFIG: ThemeConfig = {
-	theme: ColorThemeKey.RUBY,
+	theme: ColorThemeKey.EMERALD,
 	mode: "dark"
 };
 // Specifying a fallback default value
@@ -145,7 +145,7 @@ const initialThemeState: ThemeContextState = {
 	toggleColorMode: () => {},
 	changeColorTheme: () => {},
 	config: DEFAULT_CONFIG,
-	theme: COLOR_THEME_MAPPINGS[ColorThemeKey.RUBY].dark
+	theme: COLOR_THEME_MAPPINGS[ColorThemeKey.EMERALD].dark
 };
 
 export const ThemeContext = createContext<ThemeContextState>(initialThemeState);

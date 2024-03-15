@@ -122,11 +122,11 @@ export const CARDS: CardProps[] = [
 	},
 	{
 		id: "05",
-		title: "SpaceX successfully launches Starship in third flight test",
-		text: "After two prior attempts exploded soon after launch, the Starship prototype reached space in one piece but was reported lost before the planned splashdown.",
-		alt: "Starship orbital test flight 3",
+		title: "Loki S2 finale recap - a glorious purpose at the end of time",
+		text: "Loki's Season 2 finale showcases the character's growth and his willingness to make the impossible choice to save all existence.",
+		alt: "Tom Hiddleston as Loki in S2 finale",
 		image: new URL(
-			"https://techcrunch.com/wp-content/uploads/2024/03/Screenshot-2024-03-14-at-9.39.54-AM.png?w=1390&crop=1"
+			"https://static1.colliderimages.com/wordpress/wp-content/uploads/2023/11/loki-tom-hiddleston-season-2.jpg?q=50&fit=crop&w=1500&dpr=1.5"
 		),
 		author: {
 			id: "0005",
