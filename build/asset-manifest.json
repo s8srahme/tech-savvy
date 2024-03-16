@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/static/js/main.4a46e179.js",
+    "static/js/685.b668a5ac.chunk.js": "/static/js/685.b668a5ac.chunk.js",
+    "service-worker.js": "/service-worker.js",
+    "static/media/wordmark-logo-dark-mode-529x93.png": "/static/media/wordmark-logo-dark-mode-529x93.019add48a5720149ccb4.png",
+    "static/media/wordmark-logo-light-mode-529x93.png": "/static/media/wordmark-logo-light-mode-529x93.f4e26cc04a86f26064e7.png",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "static/js/main.4a46e179.js"
+  ]
+}
