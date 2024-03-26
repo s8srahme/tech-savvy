@@ -84,11 +84,7 @@
 
 import { FC, useEffect, useMemo, useRef } from "react";
 
-import {
-	EastOutlined as EastIcon,
-	Inventory2Outlined as InventoryIcon,
-	WestOutlined as WestIcon
-} from "@mui/icons-material";
+import { EastOutlined as EastIcon, ReportOutlined as ReportIcon, WestOutlined as WestIcon } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 
 import { Icon } from "@/components/data-display";
@@ -185,10 +181,10 @@ export const HorizontalCardGrid: FC<HorizontalCardGridProps> = ({ cards, header,
 	const buttonProps: HorizontalCardGridHeaderButtonProps = useMemo(
 		() => ({
 			left: { onClick: handlePreviousButtonClick, disabled: !canBeScrolled.left },
-			right: { onClick: handleNextButtonClick, disabled: !canBeScrolled.right }
+			right: { onClick: handleNextButtonClick, disabled: cards.length === 0 ? true : !canBeScrolled.right }
 		}),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[canBeScrolled]
+		[canBeScrolled, cards]
 	);
 
 	// R E N D E R  M E T H O D
@@ -208,7 +204,7 @@ export const HorizontalCardGrid: FC<HorizontalCardGridProps> = ({ cards, header,
 				<EmptyListing
 					title={emptyListing.title}
 					description={emptyListing.description}
-					IconComponent={InventoryIcon}
+					IconComponent={ReportIcon}
 					// buttonProps={{
 					// 	label: "Go back",
 					// 	urlMapping: { type: "relative", value: { pathPattern: RoutePathMapping.home.HOME_ROOT } }

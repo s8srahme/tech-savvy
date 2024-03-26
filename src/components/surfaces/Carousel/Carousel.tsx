@@ -1,6 +1,6 @@
 import { FC, memo, useMemo, useRef, useState } from "react";
 
-import { PetsOutlined as PetsIcon } from "@mui/icons-material";
+import { ReportOutlined as ReportIcon } from "@mui/icons-material";
 import { CardActionArea, Slide as MuiSlide } from "@mui/material";
 
 import { ImageMedia, Typography } from "@/components/data-display";
@@ -97,10 +97,13 @@ export const Carousel: FC<CarouselProps> = ({ slides, header, emptyListing }) =>
 	const buttonProps: HorizontalCardGridHeaderButtonProps = useMemo(
 		() => ({
 			left: { onClick: handlePreviousSlideClick, disabled: currentSlide === 0 },
-			right: { onClick: handleNextSlideClick, disabled: currentSlide === slides.length - 1 }
+			right: {
+				onClick: handleNextSlideClick,
+				disabled: slides.length === 0 ? true : currentSlide === slides.length - 1
+			}
 		}),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[currentSlide]
+		[currentSlide, slides]
 	);
 
 	return (
@@ -120,7 +123,7 @@ export const Carousel: FC<CarouselProps> = ({ slides, header, emptyListing }) =>
 					<EmptyListing
 						title={emptyListing.title}
 						description={emptyListing.description}
-						IconComponent={PetsIcon}
+						IconComponent={ReportIcon}
 						// buttonProps={{
 						// 	label: "Go back",
 						// 	urlMapping: { type: "relative", value: { pathPattern: RoutePathMapping.home.HOME_ROOT } }
