@@ -1,25 +1,26 @@
 import { omit } from "ramda";
 
+import type { PayloadType, ResponsePayload } from "@/api/axios/axios.types";
 import { ApplicationModule } from "@/store/store.constants";
-import { RootActionType, RootState } from "@/store/store.types";
+import type { RootActionType, RootDataState, RootState } from "@/store/store.types";
 
 import { ViewState } from "../constants";
-import { SelectedState, SelectedStateData } from "../types";
+import type { SelectedState, SelectedStateData } from "../types";
 
-// Extract utility type constructs a type by extracting all union members (that are assignable) from given type
 export const createStateSelector = <D extends PayloadType<ResponsePayload>>(
-	applicationModule: Extract<ApplicationModule, "home">,
+	// Extract utility type constructs a type by extracting all union members (that are assignable) from given type
+	applicationModule: Extract<ApplicationModule, "home" | "articles">,
 	actionType: RootActionType,
 	rootState: RootState
 ): SelectedState<D> => {
-	const selectedStateDataPayload = rootState[applicationModule][actionType];
-	const selectedStateData = selectedStateDataPayload ? omit(["status"], selectedStateDataPayload) : null;
-	const selectedState: SelectedState<D> = {
+	const selectedDataState = rootState[applicationModule] as RootDataState;
+	const selectedPayload = selectedDataState[actionType];
+	const selectedData = selectedPayload ? omit(["status"], selectedPayload) : null;
+	return {
 		loading: rootState.loading[actionType],
 		error: rootState.error[actionType],
-		data: selectedStateData as SelectedStateData<D>
+		data: selectedData as SelectedStateData<D>
 	};
-	return selectedState;
 };
 
 export const getViewState = <D extends PayloadType<ResponsePayload>>({

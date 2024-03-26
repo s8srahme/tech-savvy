@@ -8,6 +8,8 @@ import { RoutePathMapping } from "@/router/router.routes";
 import { Page404Response } from "./Page404.constants";
 import { Page404Props } from "./Page404.types";
 
+// TODO: Modify Page404 UI design
+
 export const Page404: FC<Page404Props> = ({ status }) => {
 	const {
 		message: { title, subtitle, description }

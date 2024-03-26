@@ -8,7 +8,7 @@ import { Store, applyMiddleware, legacy_createStore as createStore } from "redux
 import { thunk } from "redux-thunk";
 
 import { initialRootState, rootReducer } from "./store.reducers";
-import { RootAction, RootState } from "./store.types";
+import type { RootAction, RootState } from "./store.types";
 
 const middlewares = [thunk]; // Bootstrap required middlewares
 

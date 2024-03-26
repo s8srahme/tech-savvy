@@ -26,31 +26,38 @@
  */
 
 import { apiConfig } from "@/api/api.config";
-import { IDataService } from "@/api/api.interfaces";
+import type { IDataService } from "@/api/api.interfaces";
 import { API } from "@/api/axios/axios.helpers";
+import type { RequestParam } from "@/api/axios/axios.types";
 
-// Create a data service with methods needed to interact with User API (via CRUD requests) using the axios base
+import type { AuthorRequestPayload, AuthorResponsePayload } from "./Author.types";
+
+// Create a data service with methods needed to interact with Author API (via CRUD requests) using the axios base
 // instance
-class UserService implements IDataService<UserResponsePayload, UserRequestPayload> {
+class AuthorService implements IDataService<AuthorResponsePayload, AuthorRequestPayload> {
 	// Define a class member in the constructor
 	constructor(readonly endpointPath: string) {}
 
-	// When creating class methods, you should avoid the this value being bound to something else other than the class
-	// instance. To do that, use arrow functions as direct values of class methods.
-	readonly retrieveOne = (id: string) => API.get<UserResponsePayload>(`${this.endpointPath}/${id}`);
+	/**
+	 * When creating class methods, you should avoid the this value being bound to something else other than the class
+	 * instance. To do that, use arrow functions as direct values of class methods.
+	 */
+	readonly retrieveOne = (id: string) => API.get<AuthorResponsePayload>(`${this.endpointPath}/${id}`);
 
-	// Perform filter, paginate, sort, search, etc. Second parameter to axios.get() is options, where Axios will
-	// serialize options.params and add it to the query string, e.g. { params: { answer: 42 } } is equivalent to
-	// ?answer=42.
+	/**
+	 * Perform filter, paginate, sort, search, etc. Second parameter to axios.get() is options, where Axios will
+	 * serialize options.params and add it to the query string, e.g. { params: { answer: 42 } } is equivalent to
+	 * ?answer=42.
+	 */
 	readonly retrieveMany = (params: RequestParam) =>
-		API.getMany<UserResponsePayload[]>(this.endpointPath, {
+		API.getMany<AuthorResponsePayload[]>(this.endpointPath, {
 			params
 		});
 
-	readonly createOne = (data: UserRequestPayload) => API.post<UserRequestPayload>(this.endpointPath, data);
+	readonly createOne = (data: AuthorRequestPayload) => API.post<AuthorRequestPayload>(this.endpointPath, data);
 
-	readonly updateOne = (id: string, data: UserRequestPayload) =>
-		API.patch<UserResponsePayload, UserRequestPayload>(`${this.endpointPath}/${id}`, data);
+	readonly updateOne = (id: string, data: AuthorRequestPayload) =>
+		API.patch<AuthorResponsePayload, AuthorRequestPayload>(`${this.endpointPath}/${id}`, data);
 
 	readonly deleteOne = (id: string) => API.delete<never>(`${this.endpointPath}/${id}`);
 
@@ -58,4 +65,4 @@ class UserService implements IDataService<UserResponsePayload, UserRequestPayloa
 }
 
 // Same object is returned if the module has already been imported from the same path
-export const userService = new UserService(apiConfig.endpointPath.AUTHORS);
+export const authorService = new AuthorService(apiConfig.endpointPath.AUTHORS);

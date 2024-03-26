@@ -12,37 +12,16 @@ import { FC } from "react";
 import { Stack } from "@mui/material";
 
 import { Carousel, HorizontalCardGrid } from "@/components/surfaces";
-import { CAROUSEL_CARDS } from "@/components/surfaces/Carousel/Carousel.constants";
-import { CARDS } from "@/components/surfaces/HorizontalCardGrid/HorizontalCardGrid.constants";
 
-export const Home: FC = () => {
-	// throw new Error("muhahaha...");
+import type { HomeProps } from "./Home.types";
+
+export const Home: FC<HomeProps> = ({ trendingProps, recentlyReleasedProps, mostClappedProps }) => {
+	// TODO: Handle error via implementing ErrorBoundary. Try `throw new Error("muhahaha...");` for testing.
 	return (
 		<Stack spacing={3} sx={{ width: "100%" }}>
-			<Carousel
-				slides={CAROUSEL_CARDS}
-				header={{ title: "Trending" }}
-				emptyListing={{
-					title: "Nothing's trending yet!",
-					description: "It looks like nothing is trending at this moment. Please check back at a later time."
-				}}
-			/>
-			<HorizontalCardGrid
-				cards={CARDS}
-				header={{ title: "Recent Releases" }}
-				emptyListing={{
-					title: "Nothing's trending yet!",
-					description: "It looks like nothing is trending at this moment. Please check back at a later time."
-				}}
-			/>
-			<HorizontalCardGrid
-				cards={CARDS.toReversed()}
-				header={{ title: "Most Clapped" }}
-				emptyListing={{
-					title: "No claps yet!",
-					description: "It looks like there are no claps at this moment. Please check back at a later time."
-				}}
-			/>
+			<Carousel {...trendingProps} />
+			<HorizontalCardGrid {...recentlyReleasedProps} />
+			<HorizontalCardGrid {...mostClappedProps} />
 		</Stack>
 	);
 };

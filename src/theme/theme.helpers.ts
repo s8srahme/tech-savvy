@@ -24,6 +24,13 @@ import { ColorTheme } from "./theme.types";
  * charCodeAt() method of String values returns an integer between 0 and 65535 representing the UTF-16 code unit value
  * of the character at the specified index. If index is out of range (i.e. not between 0 and str.length - 1), then
  * charCodeAt() returns NaN.
+ *
+ * includes() method of String values performs a case-sensitive search to determine whether a given string may be found
+ * within this string, returning true or false as appropriate. Search string parameter cannot be a regex and optional
+ * position parameter specifies at which index to begin searching for searchString (defaults to 0).
+ *
+ * substring() method of String values returns the part of this string from the start index up to and excluding the
+ * end index, or to the end of the string if no end index is supplied.
  */
 
 export const getDefaultTheme = (initialThemeOptions: ThemeOptions): ColorTheme => {

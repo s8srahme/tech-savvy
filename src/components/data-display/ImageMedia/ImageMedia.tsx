@@ -29,7 +29,14 @@ import {
 import { ImageEventHandler, ImageMediaProps } from "./ImageMedia.types";
 import { Icon } from "../Icon/Icon";
 
-export const ImageMedia: FC<ImageMediaProps> = ({ dimension, fallbackSize = "large", overlay, src = "", ...rest }) => {
+export const ImageMedia: FC<ImageMediaProps> = ({
+	loading,
+	dimension,
+	fallbackSize = "large",
+	overlay,
+	src = "",
+	...rest
+}) => {
 	const imageRef = useRef<HTMLImageElement>(null);
 	const [imageViewState, setImageViewState] = useState<ViewState>(ViewState.LOADING);
 	const dimensionProp = { [dimension.type]: dimension.value };
@@ -60,6 +67,7 @@ export const ImageMedia: FC<ImageMediaProps> = ({ dimension, fallbackSize = "lar
 		else setImageViewState(ViewState.ERROR);
 	};
 	const renderImageOverlay = () => {
+		if (loading) return <StyledImageMediaSkeleton variant="rectangular" animation="wave" />;
 		switch (imageViewState) {
 			case ViewState.LOADING:
 				return <StyledImageMediaSkeleton variant="rectangular" animation="wave" />;

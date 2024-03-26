@@ -5,6 +5,16 @@
 
 import { AxiosResponse } from "axios";
 
+import type {
+	DELETEResponse,
+	GETManyResponse,
+	GETResponse,
+	PATCHResponse,
+	POSTResponse,
+	RequestParam,
+	ResponsePayload
+} from "./axios/axios.types";
+
 // Create a generic interface with all possible methods needed to interact with APIs. T and D refer to response and
 // request body (payload) types.
 

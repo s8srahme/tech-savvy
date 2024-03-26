@@ -55,12 +55,14 @@ export const CardHeader: FC<CardHeaderProps> = ({ subtitles = [], src, loading, 
 	);
 };
 
-export const Card: FC<CardProps> = ({ title, loading, author, alt, image, publishedOn }) => {
+export const Card: FC<CardProps> = ({ title, loading, author, alt, image, createdAt }) => {
+	// TODO: Turn image url string into URL type object in reducer
+
 	// const navigate = useNavigate();
 	const { theme } = useTheme();
 
-	const fullName = `${author.name.firstName} ${author.name.lastName}`;
-	const { difference, unit } = getTimeElapsed(publishedOn);
+	const fullName = `${author?.name.firstName} ${author?.name.lastName}`;
+	const { difference, unit } = getTimeElapsed(createdAt as Date);
 	const timeElapsed = `${unit !== "now" ? `${difference} ${unit}${difference !== 1 ? "s" : ""} ago` : "Just now"}`;
 	const overlay = `linear-gradient(to top, ${theme.palette.overlay.image.colorStop1}, ${theme.palette.overlay.image.colorStop2} 25%, ${theme.palette.overlay.image.colorStop3})`;
 
@@ -73,14 +75,15 @@ export const Card: FC<CardProps> = ({ title, loading, author, alt, image, publis
 		<StyledCard variant="outlined">
 			<CardActionArea onClick={handleCardActionAreaClick}>
 				<ImageMedia
+					loading={loading}
 					fallbackSize="large"
-					src={image?.href}
+					src={image}
 					overlay={overlay}
 					dimension={{ type: "height", value: CARD_WIDTH * 1.25 }}
-					alt={alt}
+					alt={alt || ""}
 				/>
 				<CardContent>
-					<CardHeader loading={loading} size="small" src={author.avatar?.href} fullName={fullName} />
+					<CardHeader loading={loading} size="small" src={author?.avatar} fullName={fullName} />
 					<Typography sx={{ my: 1.5, minHeight: 85 }} lineClamp={3} loading={loading} noWrap variant="h5">
 						{title}
 					</Typography>
@@ -92,7 +95,7 @@ export const Card: FC<CardProps> = ({ title, loading, author, alt, image, publis
 						loading={loading}
 					/>
 					{/* <Typography variant="body1" color="text.secondary">
-						{text}
+						{description}
 					</Typography> */}
 				</CardContent>
 			</CardActionArea>

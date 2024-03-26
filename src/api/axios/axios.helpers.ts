@@ -1,6 +1,15 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { instance } from "./axios.instance";
+import {
+	DELETEResponse,
+	GETManyResponse,
+	GETResponse,
+	PATCHResponse,
+	POSTResponse,
+	RequestPayload,
+	ResponsePayload
+} from "./axios.types";
 
 export const API = {
 	post: <D extends RequestPayload>(url: string, data: D) =>

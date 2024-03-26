@@ -1,7 +1,7 @@
 import { getEnumObjectWithInitialValue } from "utils/helpers";
 
 import { LoadingActionType } from "./loading.constants";
-import { LoadingAction, LoadingReducer, LoadingState } from "./loading.types";
+import type { LoadingAction, LoadingReducer, LoadingState } from "./loading.types";
 
 /**
  * exec() method of RegExp instances searches for a match between the regular expression and a specified string. Returns

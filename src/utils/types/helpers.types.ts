@@ -1,10 +1,13 @@
+import { PayloadType, ResponsePayload, SuccessResponse } from "@/api/axios/axios.types";
 import type { RootRoutePathDynamicSegmentValue, RootRoutePathValue } from "@/router/router.types";
 import type { FailureActionError } from "@/store/store.types";
 
 /*  S E L E C T O R  */
 
-// Omit<Type, Keys> type creates a new type by picking all the properties from Type (either type or interface) and
-// excluding Keys (either single or multiple key strings separated by pipe operator, i.e. union type).
+/**
+ * Omit<Type, Keys> type creates a new type by picking all the properties from Type (either type or interface) and
+ * excluding Keys (either single or multiple key strings separated by pipe operator, i.e. union type).
+ */
 export type SelectedStateData<D extends PayloadType<ResponsePayload>> = Omit<SuccessResponse<D>, "status"> | null;
 export type SelectedState<D extends PayloadType<ResponsePayload>> = {
 	loading: boolean;

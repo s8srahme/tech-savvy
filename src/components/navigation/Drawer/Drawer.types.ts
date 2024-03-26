@@ -8,8 +8,9 @@ import {
 	DrawerProps as MuiDrawerProps
 } from "@mui/material";
 
-import { ImageMediaProps } from "@/components/data-display";
-import { RelativeURL, URLMapping } from "@/utils/types";
+import { ArticleCategory, ArticleFilter } from "@/api/services";
+import type { ImageMediaProps } from "@/components/data-display";
+import type { RelativeURL, URLMapping } from "@/utils/types";
 
 // Common prop types
 
@@ -22,7 +23,7 @@ type CommonProps = {
 export type DrawerProps = MuiDrawerProps & { listMappings: DrawerListMapping[] };
 export type DrawerListItemHandler = MouseEventHandler<HTMLDivElement> | undefined;
 export type DrawerListItemMapping = {
-	id: string;
+	id: ArticleCategory | ArticleFilter;
 	text: string;
 	icon: JSX.Element;
 	urlMapping: URLMapping<"relative", RelativeURL>;

@@ -1,11 +1,14 @@
 import { Action, ActionCreator } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
-// TODO: Refactor type exports to avoid cyclic dependencies
-import { ErrorReducer, ErrorState } from "./error/error.types";
+import { ErrorResponse, PayloadType, ResponsePayload, SuccessResponse } from "@/api/axios/axios.types";
+
+import { ArticlesActionStateType, ArticlesActionType } from "./articles/articles.constants";
+import type { ArticlesAction, ArticlesDataState, ArticlesReducer } from "./articles/articles.types";
+import type { ErrorReducer, ErrorState } from "./error/error.types";
 import { HomeActionStateType, HomeActionType } from "./home/home.constants";
-import { HomeAction, HomeDataState, HomeReducer } from "./home/home.types";
-import { LoadingReducer, LoadingState } from "./loading/loading.types";
+import type { HomeAction, HomeDataState, HomeReducer } from "./home/home.types";
+import type { LoadingReducer, LoadingState } from "./loading/loading.types";
 import { ApplicationModule, ApplicationStateExtension } from "./store.constants";
 
 /*  A P P L I C A T I O N  S T A T E  T Y P E  */
@@ -14,9 +17,10 @@ export type ApplicationStateKey = `${ApplicationModule}` | `${ApplicationStateEx
 
 /*  R O O T  A C T I O N  T Y P E S  */
 
-export type RootActionType = HomeActionType;
-export type RootActionStateType = HomeActionStateType;
-export type RootAction = HomeAction;
+export type RootActionType = HomeActionType | ArticlesActionType;
+export type RootActionStateType = HomeActionStateType | ArticlesActionStateType;
+export type RootDataState = HomeDataState & ArticlesDataState;
+export type RootAction = HomeAction | ArticlesAction;
 
 export type ActionCreatorType<A extends Action> = ActionCreator<ThunkAction<Promise<void>, RootState, unknown, A>>;
 export type ThunkDispatchType<A extends Action> = ThunkDispatch<RootState, unknown, A>;
@@ -48,8 +52,8 @@ export type DataField<T extends string, R> = {
 
 export type RootReducer = {
 	[ApplicationModule.HOME]: HomeReducer;
+	[ApplicationModule.ARTICLES]: ArticlesReducer;
 	// [ApplicationModule.AUTH]: (state: undefined, action: Action) => ({}),
-	// [ApplicationModule.ARTICLES]: (state: undefined, action: Action) => ({}),
 	// [ApplicationModule.AUTHORS]: (state: undefined, action: Action) => ({}),
 	// [ApplicationModule.ME]: (state: undefined, action: Action) => ({}),
 	// [ApplicationModule.ABOUT]: (state: undefined, action: Action) => ({}),
@@ -58,8 +62,8 @@ export type RootReducer = {
 };
 export type RootState = {
 	[ApplicationModule.HOME]: HomeDataState;
+	[ApplicationModule.ARTICLES]: ArticlesDataState;
 	// [ApplicationModule.AUTH]: {},
-	// [ApplicationModule.ARTICLES]: {},
 	// [ApplicationModule.AUTHORS]: {},
 	// [ApplicationModule.ME]: {},
 	// [ApplicationModule.ABOUT]: {},

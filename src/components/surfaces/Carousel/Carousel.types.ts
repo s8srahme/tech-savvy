@@ -6,7 +6,7 @@ export type CarouselSlide = CardProps;
 export type CarouselProps = {
 	header: { title: string };
 	slides: CarouselSlide[];
-	loading?: boolean | undefined;
+	loading: boolean | undefined;
 	emptyListing: { title: string; description: string };
 };
 
@@ -19,7 +19,6 @@ export type CarouselSlideTransition = {
 export type CarouselSlideProps = {
 	transition: CarouselSlideTransition;
 	slide: CarouselSlide;
-	loading?: boolean | undefined;
 };
 
 export type StyledCarouselSlideProps = MuiCardProps;

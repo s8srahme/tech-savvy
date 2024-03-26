@@ -61,9 +61,9 @@ const basePath: BasePath = {
 	test: "/api/v2"
 };
 const baseUrl: BaseURL = {
-	production: new URL(basePath.production, "https://example.com"),
-	development: new URL(basePath.development, "https://localhost:3000"),
-	test: new URL(basePath.test, "https://localhost:3000")
+	production: new URL(basePath.production, "http://example.com"),
+	development: new URL(basePath.development, "http://localhost:3000"),
+	test: new URL(basePath.test, "http://localhost:3000")
 };
 enum EndpointPath {
 	AUTH = "/auth",

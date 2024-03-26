@@ -26,15 +26,14 @@ import { HorizontalCardGridHeaderButtonProps } from "../HorizontalCardGrid/Horiz
 const CarouselSlide = memo<CarouselSlideProps>(
 	({
 		transition: { transitionIn, direction, container },
-		slide: { title, alt, image, author, publishedOn },
-		loading
+		slide: { title, alt, image, author, createdAt, loading }
 	}) => {
 		// const navigate = useNavigate();
 		const { theme } = useTheme();
 		const [containerWidth] = useElementSize(container);
 
-		const fullName = `${author.name.firstName} ${author.name.lastName}`;
-		const { difference, unit } = getTimeElapsed(publishedOn);
+		const fullName = `${author?.name.firstName} ${author?.name.lastName}`;
+		const { difference, unit } = getTimeElapsed(createdAt as Date);
 		const timeElapsed = `${unit !== "now" ? `${difference} ${unit}${difference !== 1 ? "s" : ""} ago` : "Just now"}`;
 		const overlay = `linear-gradient(to right, ${theme.palette.overlay.image.colorStop1}, ${theme.palette.overlay.image.colorStop2} 85%, ${theme.palette.overlay.image.colorStop3})`;
 
@@ -51,11 +50,12 @@ const CarouselSlide = memo<CarouselSlideProps>(
 				>
 					<CardActionArea onClick={handleCardActionAreaClick}>
 						<ImageMedia
+							loading={loading}
 							fallbackSize="large"
-							src={image?.href}
+							src={image}
 							overlay={overlay}
 							dimension={{ type: "height", value: CARD_WIDTH * 1.25 }}
-							alt={alt}
+							alt={alt || ""}
 						/>
 						<StyledCardContentContainer>
 							<StyledCardContent>
@@ -64,7 +64,7 @@ const CarouselSlide = memo<CarouselSlideProps>(
 								</Typography>
 								<CardHeader
 									loading={loading}
-									src={author.avatar?.href}
+									src={author?.avatar}
 									fullName={fullName}
 									subtitles={[
 										{ id: "0", text: "5 min read" },
@@ -80,7 +80,7 @@ const CarouselSlide = memo<CarouselSlideProps>(
 	}
 );
 
-export const Carousel: FC<CarouselProps> = ({ slides, loading, header, emptyListing }) => {
+export const Carousel: FC<CarouselProps> = ({ slides, header, emptyListing }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [slideDirection, setSlideDirection] = useState<CarouselSlideDirection>("left");
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -109,12 +109,12 @@ export const Carousel: FC<CarouselProps> = ({ slides, loading, header, emptyList
 			<StyledCarouselSlideContainer direction="row" ref={containerRef}>
 				{slides?.length ? (
 					slides.map((slide, index) => {
-						const slideProps: CarouselSlideTransition = {
+						const transitionProps: CarouselSlideTransition = {
 							transitionIn: currentSlide === index,
 							direction: slideDirection,
 							container: containerRef.current
 						};
-						return <CarouselSlide key={slide.id} transition={slideProps} slide={slide} loading={loading} />;
+						return <CarouselSlide key={slide.id} transition={transitionProps} slide={slide} />;
 					})
 				) : (
 					<EmptyListing

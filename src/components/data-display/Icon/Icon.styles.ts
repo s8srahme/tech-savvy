@@ -28,28 +28,15 @@
  *
  * S P A C I N G  &  G R I D  P R O P E R T I E S
  *
- * Spacing properties (margin and padding) as well as CSS Grid properties (gap, rowGap and columnGap) multiply the
- * values they receive by the theme.spacing value (default value is 8px).
+ * Spacing properties (margin and padding) as well as CSS Grid properties (gap) multiply the values they receive by the
+ * theme.spacing value (default value is 8px). Gutters are spacings between rows and columns that can be created in CSS
+ * Grid layout using column-gap, row-gap or gap properties.
  */
 
 import { SxProps } from "@mui/material/styles";
 
 import { IconWidth } from "./Icon.constants";
-import { IconSize } from "./Icon.types";
-
-// import { SxProps } from "@mui/material";
-// import { Theme } from "@mui/material/styles";
-
-// const useStyles = makeStyles({
-//   // style rule
-//   foo: (props) => ({
-//     backgroundColor: props.backgroundColor,
-//   }),
-//   bar: {
-//     // CSS property
-//     color: (props) => props.color,
-//   },
-// });
+import type { IconSize } from "./Icon.types";
 
 export const useStyles = (size: IconSize): SxProps => {
 	const styles = {

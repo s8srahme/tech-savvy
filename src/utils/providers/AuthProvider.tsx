@@ -16,11 +16,13 @@ import { FC, PropsWithChildren, createContext, useCallback, useMemo } from "reac
 
 // import { useNavigate } from "react-router-dom";
 
+import { Author } from "@/api/services";
+
 import { useLocalStorage } from "../hooks";
 
 export interface AuthContextState {
-	user: User | null;
-	login: (data: User) => void;
+	user: Author | null;
+	login: (data: Author) => void;
 	logout: () => void;
 }
 
@@ -37,7 +39,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 	// To update context, combine it with state. Declare a state variable in the parent component and pass the current
 	// state down as the context value to the provider.
 
-	const [currentUser, setCurrentUser] = useLocalStorage<User | null>("user", null);
+	const [currentUser, setCurrentUser] = useLocalStorage<Author | null>("user", null);
 	// const navigate = useNavigate();
 
 	// Authenticate user

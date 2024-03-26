@@ -16,6 +16,7 @@ export type ImageMediaProps = Omit<CardMediaProps, "onLoad" | "onError" | "image
 	onLoad?: ImageEventHandler;
 	dimension: ImageDimension;
 	fallbackSize: IconSize;
+	loading?: boolean;
 };
 
 type CommonStyledProps = { height?: ImageDimensionValue; width?: ImageDimensionValue };

@@ -20,41 +20,73 @@ import { FC, useEffect } from "react";
 
 import { curry } from "ramda";
 
-import { retrieveTutorials } from "@/store/home/home.actions";
+import type { Article } from "@/api/services";
+import {
+	retrieveMostClappedArticles,
+	retrieveRecentlyReleasedArticles,
+	retrieveTrendingArticles
+} from "@/store/home/home.actions";
 import { HomeActionType } from "@/store/home/home.constants";
-import { RetrieveManyTutorialsAction } from "@/store/home/home.types";
+import {
+	RetrieveMostClappedArticlesAction,
+	RetrieveRecentlyReleasedArticlesAction,
+	RetrieveTrendingArticlesAction
+} from "@/store/home/home.types";
 import { ApplicationModule } from "@/store/store.constants";
 import { createStateSelector, getViewState } from "@/utils/helpers";
 import { useDispatch, useSelector } from "@/utils/hooks";
 
 import { Home } from "./Home.component";
-// import { ViewState } from "@/utils/utils.types";
+import { toMostClappedProps, toRecentlyReleasedProps, toTrendingProps } from "./Home.helpers";
+import { HomeProps } from "./Home.types";
 
 interface HomeContainerProps {}
 
 export const HomeContainer: FC<HomeContainerProps> = () => {
-	const tutorialsStateSelector = curry(createStateSelector<User[]>)(
+	// S E L E C T O R S
+
+	const trendingArticlesStateSelector = curry(createStateSelector<Article[]>)(
 		ApplicationModule.HOME,
-		HomeActionType.RETRIEVE_MANY_TUTORIALS
+		HomeActionType.RETRIEVE_TRENDING_ARTICLES
 	);
-	const tutorialsState = useSelector((rootState) => tutorialsStateSelector(rootState));
-	const tutorialsViewState = getViewState<User[]>(tutorialsState);
-	const dispatch = useDispatch<RetrieveManyTutorialsAction>();
+	const trendingArticlesState = useSelector((rootState) => trendingArticlesStateSelector(rootState));
+	const trendingArticlesViewState = getViewState<Article[]>(trendingArticlesState);
+
+	const recentlyReleasedArticlesStateSelector = curry(createStateSelector<Article[]>)(
+		ApplicationModule.HOME,
+		HomeActionType.RETRIEVE_RECENTLY_RELEASED_ARTICLES
+	);
+	const recentlyReleasedArticlesState = useSelector((rootState) => recentlyReleasedArticlesStateSelector(rootState));
+	const recentlyReleasedArticlesViewState = getViewState<Article[]>(recentlyReleasedArticlesState);
+
+	const mostClappedArticlesStateSelector = curry(createStateSelector<Article[]>)(
+		ApplicationModule.HOME,
+		HomeActionType.RETRIEVE_MOST_CLAPPED_ARTICLES
+	);
+	const mostClappedArticlesState = useSelector((rootState) => mostClappedArticlesStateSelector(rootState));
+	const mostClappedArticlesViewState = getViewState<Article[]>(mostClappedArticlesState);
+
+	// D I S P A T C H E S
+
+	const dispatchRecentlyReleasedArticles = useDispatch<RetrieveRecentlyReleasedArticlesAction>();
+	const dispatchMostClappedArticles = useDispatch<RetrieveMostClappedArticlesAction>();
+	const dispatchTrendingArticles = useDispatch<RetrieveTrendingArticlesAction>();
 
 	useEffect(() => {
-		dispatch(retrieveTutorials({}));
+		dispatchRecentlyReleasedArticles(retrieveRecentlyReleasedArticles({ sort: "createdAt:desc", limit: 12, page: 1 }));
+		dispatchMostClappedArticles(retrieveMostClappedArticles({ sort: "claps:desc", limit: 12, page: 1 }));
+		dispatchTrendingArticles(retrieveTrendingArticles({ "claps[gte]": 2, "claps[lte]": 10, limit: 12, page: 1 }));
 	}, []);
 
-	switch (tutorialsViewState) {
-		// case ViewState.LOADING:
-		// 	return null;
-		// case ViewState.ERROR:
-		// 	return null;
-		// case ViewState.EMPTY:
-		// 	return null;
-		// case ViewState.DATA:
-		// 	return null;
-		default:
-			return <Home />;
-	}
+	// C H I L D R E N  P R O P S
+
+	const homeProps: HomeProps = {
+		recentlyReleasedProps: toRecentlyReleasedProps(recentlyReleasedArticlesState, recentlyReleasedArticlesViewState),
+		mostClappedProps: toMostClappedProps(mostClappedArticlesState, mostClappedArticlesViewState),
+		trendingProps: toTrendingProps(trendingArticlesState, trendingArticlesViewState)
+	};
+
+	// R E N D E R I N G
+
+	return <Home {...homeProps} />;
 };

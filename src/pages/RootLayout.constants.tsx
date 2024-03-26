@@ -1,5 +1,5 @@
 import {
-	BookmarksOutlined as BookmarksIcon,
+	// BookmarksOutlined as BookmarksIcon,
 	ChargingStationOutlined as ChargingStationIcon,
 	CurrencyBitcoinOutlined as CurrencyBitcoinIcon,
 	Email as EmailIcon,
@@ -13,7 +13,7 @@ import {
 	PsychologyOutlined as PsychologyIcon,
 	Reddit as RedditIcon,
 	RocketLaunchOutlined as RocketLaunchIcon,
-	SettingsOutlined as SettingsIcon,
+	// SettingsOutlined as SettingsIcon,
 	SportsEsportsOutlined as SportsEsportsIcon,
 	TerminalOutlined as TerminalIcon,
 	WavingHandOutlined as WavingHandIcon,
@@ -22,6 +22,7 @@ import {
 	YouTube as YouTubeIcon
 } from "@mui/icons-material";
 
+import { ArticleCategory, ArticleFilter } from "@/api/services";
 import { Discord as DiscordIcon } from "@/assets/icons";
 import { Icon } from "@/components/data-display";
 import {
@@ -42,13 +43,13 @@ const DRAWER_HOME_LIST_MAPPINGS: DrawerListMapping = {
 		 * {icon} should work just fine.
 		 */
 		{
-			id: "home",
+			id: ArticleFilter.TRENDING,
 			text: "Home",
 			icon: <Icon IconComponent={HomeIcon} size="x-small" />,
 			urlMapping: { type: "relative", value: { pathPattern: RoutePathMapping.home.HOME_ROOT } }
 		},
 		{
-			id: "recent-releases",
+			id: ArticleFilter.RECENTLY_RELEASED,
 			text: "Recent Releases",
 			icon: <Icon IconComponent={LocalFireDepartmentIcon} size="x-small" />,
 			urlMapping: {
@@ -57,7 +58,7 @@ const DRAWER_HOME_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "most-clapped",
+			id: ArticleFilter.MOST_CLAPPED,
 			text: "Most Clapped",
 			icon: <Icon IconComponent={WavingHandIcon} size="x-small" />,
 			urlMapping: {
@@ -66,7 +67,7 @@ const DRAWER_HOME_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "top-authors",
+			id: ArticleFilter.TOP_AUTHORS,
 			text: "Top Authors",
 			icon: <Icon IconComponent={PeopleAltIcon} size="x-small" />,
 			urlMapping: { type: "relative", value: { pathPattern: RoutePathMapping.home.HOME_TOP_AUTHORS } }
@@ -77,7 +78,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 	label: "category",
 	mappings: [
 		{
-			id: "software-&-apps",
+			id: ArticleCategory.SOFTWARE_AND_APPS,
 			text: "Software & Apps",
 			icon: <Icon IconComponent={TerminalIcon} size="x-small" />,
 			urlMapping: {
@@ -90,7 +91,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "ai",
+			id: ArticleCategory.AI,
 			text: "AI",
 			icon: <Icon IconComponent={PsychologyIcon} size="x-small" />,
 			urlMapping: {
@@ -103,7 +104,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "ev",
+			id: ArticleCategory.EV,
 			text: "EV",
 			icon: <Icon IconComponent={EvStationIcon} size="x-small" />,
 			urlMapping: {
@@ -116,7 +117,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "crypto",
+			id: ArticleCategory.CRYPTO,
 			text: "Crypto",
 			icon: <Icon IconComponent={CurrencyBitcoinIcon} size="x-small" />,
 			urlMapping: {
@@ -129,7 +130,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "movies-&-shows",
+			id: ArticleCategory.MOVIES_AND_SHOWS,
 			text: "Movies & Shows",
 			icon: <Icon IconComponent={LiveTvIcon} size="x-small" />,
 			urlMapping: {
@@ -142,7 +143,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "gaming",
+			id: ArticleCategory.GAMING,
 			text: "Gaming",
 			icon: <Icon IconComponent={SportsEsportsIcon} size="x-small" />,
 			urlMapping: {
@@ -155,7 +156,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "space",
+			id: ArticleCategory.SPACE,
 			text: "Space",
 			icon: <Icon IconComponent={RocketLaunchIcon} size="x-small" />,
 			urlMapping: {
@@ -168,7 +169,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "work-&-career",
+			id: ArticleCategory.WORK_AND_CAREER,
 			text: "Work & Career",
 			icon: <Icon IconComponent={WorkIcon} size="x-small" />,
 			urlMapping: {
@@ -181,7 +182,7 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 			}
 		},
 		{
-			id: "electronics",
+			id: ArticleCategory.ELECTRONICS,
 			text: "Electronics",
 			icon: <Icon IconComponent={ChargingStationIcon} size="x-small" />,
 			urlMapping: {
@@ -195,37 +196,37 @@ const DRAWER_CATEGORY_LIST_MAPPINGS: DrawerListMapping = {
 		}
 	]
 };
-const DRAWER_ME_LIST_MAPPINGS: DrawerListMapping = {
-	label: "me",
-	mappings: [
-		{
-			id: "bookmarks",
-			text: "bookmarks",
-			icon: <Icon IconComponent={BookmarksIcon} size="x-small" />,
-			urlMapping: {
-				type: "relative",
-				value: {
-					pathPattern: RoutePathMapping.me.ME_BOOKMARKS
-				}
-			}
-		},
-		{
-			id: "settings",
-			text: "settings",
-			icon: <Icon IconComponent={SettingsIcon} size="x-small" />,
-			urlMapping: {
-				type: "relative",
-				value: {
-					pathPattern: RoutePathMapping.me.ME_SETTINGS
-				}
-			}
-		}
-	]
-};
+// const DRAWER_ME_LIST_MAPPINGS: DrawerListMapping = {
+// 	label: "me",
+// 	mappings: [
+// 		{
+// 			id: "bookmarks",
+// 			text: "bookmarks",
+// 			icon: <Icon IconComponent={BookmarksIcon} size="x-small" />,
+// 			urlMapping: {
+// 				type: "relative",
+// 				value: {
+// 					pathPattern: RoutePathMapping.me.ME_BOOKMARKS
+// 				}
+// 			}
+// 		},
+// 		{
+// 			id: "settings",
+// 			text: "settings",
+// 			icon: <Icon IconComponent={SettingsIcon} size="x-small" />,
+// 			urlMapping: {
+// 				type: "relative",
+// 				value: {
+// 					pathPattern: RoutePathMapping.me.ME_SETTINGS
+// 				}
+// 			}
+// 		}
+// 	]
+// };
 export const DRAWER_LIST_MAPPINGS: DrawerListMapping[] = [
 	DRAWER_HOME_LIST_MAPPINGS,
-	DRAWER_CATEGORY_LIST_MAPPINGS,
-	DRAWER_ME_LIST_MAPPINGS
+	DRAWER_CATEGORY_LIST_MAPPINGS
+	// DRAWER_ME_LIST_MAPPINGS
 ];
 
 export const APP_BAR_LINK_MAPPINGS: AppBarLinkMapping[] = [
