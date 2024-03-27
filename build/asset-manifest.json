@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.87708a95.js",
+    "main.js": "/static/js/main.4d992f32.js",
     "static/js/685.b668a5ac.chunk.js": "/static/js/685.b668a5ac.chunk.js",
     "service-worker.js": "/service-worker.js",
     "static/media/wordmark-logo-dark-mode-529x93.png": "/static/media/wordmark-logo-dark-mode-529x93.019add48a5720149ccb4.png",
@@ -8,6 +8,6 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/js/main.87708a95.js"
+    "static/js/main.4d992f32.js"
   ]
 }
