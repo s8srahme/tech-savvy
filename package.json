@@ -46,7 +46,7 @@
 	},
 	"scripts": {
 		"dev": "craco start",
-		"start": "./node_modules/.bin/serve -s build -l 4000",
+		"start": "./node_modules/.bin/serve -s build -l 4005",
 		"build": "craco build",
 		"eject": "craco eject",
 		"test": "craco test --watchAll=false",
