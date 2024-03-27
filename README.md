@@ -1,6 +1,6 @@
 # Techsavvy (revamp)
 
-Migration in progress from [old repo](https://github.com/s8srahme/techsavvy).
+Migration is in progress from [old repo](https://github.com/s8srahme/techsavvy).
 
 ## What is inside?
 
@@ -60,7 +60,7 @@ Now you're ready to rumble!
 
 ## Backend
 
-WIP
+Techsavvy frontend is powered by [Techsavvy API](https://github.com/s8srahme/techsavvy-api) running in parallel on an AWS EC2 instance.
 
 ## License
 

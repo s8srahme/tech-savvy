@@ -73,9 +73,10 @@ export const HomeContainer: FC<HomeContainerProps> = () => {
 	const dispatchTrendingArticles = useDispatch<RetrieveTrendingArticlesAction>();
 
 	useEffect(() => {
+		// FIXME: Change filters for fetching trending articles (current parameters do not make sense)
+		dispatchTrendingArticles(retrieveTrendingArticles({ "claps[gte]": 2, "claps[lte]": 10, limit: 12, page: 1 }));
 		dispatchRecentlyReleasedArticles(retrieveRecentlyReleasedArticles({ sort: "createdAt:desc", limit: 12, page: 1 }));
 		dispatchMostClappedArticles(retrieveMostClappedArticles({ sort: "claps:desc", limit: 12, page: 1 }));
-		dispatchTrendingArticles(retrieveTrendingArticles({ "claps[gte]": 2, "claps[lte]": 10, limit: 12, page: 1 }));
 	}, []);
 
 	// C H I L D R E N  P R O P S
