@@ -60,7 +60,7 @@ Now you're ready to rumble!
 
 ## Backend
 
-Techsavvy frontend is powered by [Techsavvy API](https://github.com/s8srahme/techsavvy-api) running in parallel on an AWS EC2 instance.
+Techsavvy frontend is powered by [Techsavvy API](https://github.com/s8srahme/techsavvy-api) which was initially set to run in parallel on an AWS EC2 instance. Currently the EC2 instance is unavailable due to some technical issues.
 
 ## License
 
